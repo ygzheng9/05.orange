@@ -1,0 +1,58 @@
+
+<div class="layuimini-main">
+    <h1>新增客户</h1>
+
+    <form class="layui-form">
+        #@hiddenInput("id", entry.id)
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>基本信息</legend>
+        </fieldset>
+
+        <div class="layui-form-item">
+            #@textInputInline("公司名称", "clientName", entry.clientName, 1)
+            #@textInputInline("母公司", "parentCompany", entry.parentCompany, 0)
+            #@textInputInline("所属行业", "industry", entry.industry, 0)
+            #@textInputInline("渠道类型", "channelType", entry.channelType, 0)
+            #@textInputInline("公司所有权", "ownerType", entry.ownerType, 0)
+            #@textInputInline("法定代表人", "represent", entry.represent, 0)
+            #@textInputInline("客户代码", "clientCode", entry.clientCode, 0)
+            #@textInputInline("客户电话", "telephone", entry.telephone, 0)
+            #@textInputInline("客户网站", "website", entry.website, 0)
+            #@textInputInline("客户邮箱", "email", entry.email, 0)
+        </div>
+
+        #@textInput("客户地址", "address", entry.address, 0)
+        #@textInput("客户备注", "remark", entry.remark, 0)
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>动态信息</legend>
+        </fieldset>
+
+        <div class="layui-form-item">
+            #@textInputInline("年度计划", "remark", entry.remark, 0)
+            #@textInputInline("客户类型", "remark", entry.remark, 0)
+            #@textInputInline("满意度", "remark", entry.remark, 0)
+            #@textInputInline("优先级", "remark", entry.remark, 0)
+            #@textInputInline("签单概率", "remark", entry.remark, 0)
+            #@textInputInline("签约计划", "remark", entry.remark, 0)
+        </div>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>对接人信息</legend>
+        </fieldset>
+
+
+        <div class="layui-form-item">
+        #@textInputInline("客户对接人", "remark", entry.remark, 0)
+        #@textInputInline("对接人电话", "remark", entry.remark, 0)
+        #@textInputInline("邮箱", "remark", entry.remark, 0)
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>

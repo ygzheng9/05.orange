@@ -1,0 +1,34 @@
+
+<div class="layuimini-main">
+    <form class="layui-form">
+        #@hiddenInput("id", entry.id)
+        #@hiddenInput("clientId", entry.clientId)
+
+        #@textInput("报告名称", "reportName", entry.reportName, 1)
+
+        #@textInput("拜访日期", "callDate", entry.callDate, 1)
+        #@textInput("地点", "callAddress", entry.callAddress, 0)
+        #@textInput("拜访类型", "callType", entry.callType, 1)
+
+        <div class="layui-form-item">
+            #@textInputInline("联系人", "callHost", entry.callHost, 1)
+            #@textInputInline("职位", "hostTitle", entry.hostTitle, 0)
+            #@textInputInline("电话", "hostPhone", entry.hostPhone, 0)
+        </div>
+
+        <div class="layui-form-item">
+            #@textInputInline("业务员", "salesName", entry.salesName, 0)
+            #@textInputInline("职位", "salesTitle", entry.salesTitle, 0)
+            #@textInputInline("备注", "remark", entry.remark, 0)
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+#@loadJS("/assets/js/app/client_call_entry.js")

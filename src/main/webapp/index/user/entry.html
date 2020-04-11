@@ -1,0 +1,28 @@
+<div class="layuimini-main">
+    <form class="layui-form">
+        #@hiddenInput("id", user.id)
+
+        #@textInput("用户名", "userName", user.userName, 1)
+        #@textInput("邮箱", "email", user.email, 1)
+
+        <div class="layui-form-item">
+            #@selectInputInline("公司", "company", user.company, 1, companies)
+            #@selectInputInline("部门", "department", user.department, 1, departments)
+            #@selectInputInline("城市", "city", user.city, 0, cities)
+        </div>
+
+        #@radioInput("性别", "sex", user.sex, 0, genders)
+
+        #@checkInput("权限", "roles", checkedRoles, 0, roles)
+
+        #@textAreaInput("备注信息", "remark", user.remark, 0)
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+#@loadJS("/assets/js/app/userEntry.js")

@@ -1,0 +1,35 @@
+
+<div class="layuimini-main">
+    <form class="layui-form" lay-filter="opp_entry">
+        #@hiddenInput("id", entry.id)
+        #@hiddenInput("clientId", entry.clientId)
+
+        #@textInput("项目名称", "projectName", entry.projectName, 1)
+        #@textInput("项目地点", "location", entry.location, 0)
+
+        #@textInput("类型", "bizType", entry.bizType, 1)
+
+        <div class="layui-form-item">
+            #@textInputInline("客户负责人", "clientOwner", entry.clientOwner, 1)
+            #@textInputInline("职位", "ownerTitle", entry.ownerTitle, 0)
+        </div>
+
+        <div class="layui-form-item">
+            #@textInputInline("邮箱", "ownerEmail", entry.ownerEmail, 0)
+            #@textInputInline("电话", "ownerPhone", entry.ownerPhone, 0)
+        </div>
+
+        #@textInput("跟进人", "proposalLead", entry.proposalLead, 1)
+
+        #@textAreaInput("备注", "remark", entry.remark, 0)
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveOppBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+#@loadJS("/assets/js/app/client_history_opp_entry.js")

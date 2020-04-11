@@ -1,0 +1,38 @@
+
+<div class="layuimini-main">
+    <form class="layui-form" lay-filter="contactEntryForm">
+        #@hiddenInput("id", entry.id)
+        #@hiddenInput("clientId", entry.clientId)
+
+        <div class="layui-form-item">
+            #@textInputInline("姓名", "personName", entry.personName, 1)
+            #@textInputInline("部门", "department", entry.department, 0)
+            #@textInputInline("职位", "title", entry.title, 0)
+        </div>
+
+        <div class="layui-form-item">
+            #@textInputInline("电话", "phone", entry.phone, 0)
+            #@textInputInline("邮箱", "email", entry.email, 0)
+        </div>
+
+        #@textInput("关注点", "focus", entry.focus, 0)
+
+        <div class="layui-form-item">
+            #@textInputInline("当前态度", "currentVote", entry.currentVote, 0)
+            #@textInputInline("目标", "targetVote", entry.targetVote, 0)
+        </div>
+
+        #@textInput("负责人", "coveredBy", entry.coveredBy, 0)
+
+        #@textAreaInput("备注", "remark", entry.remark, 0)
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+#@loadJS("/assets/js/app/client_contact_entry.js")

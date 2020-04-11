@@ -1,0 +1,296 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "welcomePage1"
+  },
+  "logoInfo": {
+    "title": "METIS",
+    "image": "assets/images/brain.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "基础管理",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "主页模板",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "主页一",
+              "href": "welcomePage1",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页二",
+              "href": "welcomePage2",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            },
+            {
+              "title": "主页三",
+              "href": "welcomePage3",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "用户管理",
+          "href": "userList",
+          "icon": "fa fa-file-text",
+          "target": "_self"
+        },
+        {
+          "title": "菜单管理",
+          "href": "page/menu.html",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
+          "title": "系统设置",
+          "href": "page/setting.html",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "表单示例",
+          "href": "",
+          "icon": "fa fa-calendar",
+          "target": "_self",
+          "child": [
+            {
+              "title": "普通表单",
+              "href": "formDemo",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "分步表单",
+              "href": "page/form-step.html",
+              "icon": "fa fa-navicon",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "登录模板",
+          "href": "",
+          "icon": "fa fa-flag-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "登录-1",
+              "href": "page/login-1.html",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_blank"
+            },
+            {
+              "title": "登录-2",
+              "href": "page/login-2.html",
+              "icon": "fa fa-viacoin",
+              "target": "_blank"
+            }
+          ]
+        },
+        {
+          "title": "异常页面",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "404页面",
+              "href": "page/404.html",
+              "icon": "fa fa-hourglass-end",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "其它界面",
+          "href": "",
+          "icon": "fa fa-snowflake-o",
+          "target": "",
+          "child": [
+            {
+              "title": "按钮示例",
+              "href": "page/button.html",
+              "icon": "fa fa-snowflake-o",
+              "target": "_self"
+            },
+            {
+              "title": "弹出层",
+              "href": "page/layer.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "营销管理",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "客户档案",
+          "href": "",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "客户清单",
+              "href": "page/sales/client/list",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "客户基本信息",
+              "id": "basicInfoMenuId",
+              "href": "page/sales/client/basicInfo",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "过往合作记录",
+              "id": "clientHistoryMenuId",
+              "href": "page/sales/client/clientHistory",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "关键决策人",
+              "id": "clientContactMenuId",
+              "href": "page/sales/client/clientContact",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "组织架构图",
+              "href": "page/sales/client/clientOrg",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "商机管理",
+          "href": "",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "商机报备",
+              "href": "page/sales/lead/newLead",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "商机列表",
+              "href": "page/sales/lead/listLead",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "商机详情",
+              "href": "page/lead/basicInfo",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "商机历史",
+              "href": "page/sales/lead/history",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "跨部门合作",
+              "href": "page/sales/lead/crossHelp",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "经营决策",
+          "href": "",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "管理驾驶舱",
+              "href": "page/sales/management/dashboard",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "审批",
+              "href": "page/sales/management/approval",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "供应链",
+      "icon": "fa fa-slideshare",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "多级菜单",
+          "href": "",
+          "icon": "fa fa-meetup",
+          "target": "",
+          "child": [
+            {
+              "title": "按钮1",
+              "href": "page/button.html?v=1",
+              "icon": "fa fa-calendar",
+              "target": "_self",
+              "child": [
+                {
+                  "title": "按钮2",
+                  "href": "page/button.html?v=2",
+                  "icon": "fa fa-snowflake-o",
+                  "target": "_self",
+                  "child": [
+                    {
+                      "title": "按钮3",
+                      "href": "page/button.html?v=3",
+                      "icon": "fa fa-snowflake-o",
+                      "target": "_self"
+                    },
+                    {
+                      "title": "表单4",
+                      "href": "page/form.html?v=1",
+                      "icon": "fa fa-calendar",
+                      "target": "_self"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "失效菜单",
+          "href": "page/error.html",
+          "icon": "fa fa-superpowers",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

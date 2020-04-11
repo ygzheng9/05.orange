@@ -1,0 +1,30 @@
+<style>
+    #formId .layui-form-label {
+        width: 200px;
+    }
+
+</style>
+
+<div class="layuimini-main">
+    <form class="layui-form" id="formId">
+        #@hiddenInput("id", entry.id)
+        #@hiddenInput("clientid", entry.clientid)
+
+        #@textInput("近三年客户总资产平均增速", "index01", entry.index01, 0)
+        #@textInput("近三年客户新上项目数量", "index02", entry.index02, 0)
+        #@textInput("近三年客户净资产平均增速", "index03", entry.index03, 0)
+        #@textInput("未来两年客户潜在商机数量", "index04", entry.index04, 0)
+        #@textInput("近三年客户重大资产购置增速", "index05", entry.index05, 0)
+        #@textInput("客户健康度", "index06", entry.index06, 0)
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+#@loadJS("/assets/js/app/client_potential_entry.js")

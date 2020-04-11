@@ -1,0 +1,33 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <h1>#(client.clientName)</h1>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>客户潜力分析 <a id="potentialEntry">更新</a></legend>
+        </fieldset>
+
+        <div class="layui-row" id="potentialShowId">
+        </div>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>客户拜访记录</legend>
+        </fieldset>
+
+        <script type="text/html" id="topToolbar">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add"> 新增拜访 </button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="lineToolbar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+
+
+#@loadJS("/assets/js/app/client_basic.js")

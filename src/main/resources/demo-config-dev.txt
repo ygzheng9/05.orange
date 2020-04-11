@@ -1,0 +1,8 @@
+# config
+
+jdbcUrl = jdbc:mysql://localhost:3366/05.orange?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+
+
+user = dangerUser
+password = !@#456QWErty
+devMode = true

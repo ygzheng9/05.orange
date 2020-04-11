@@ -1,0 +1,153 @@
+#define layout()
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link href="/assets/css/manage.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/assets/js/jquery-1.4.4.min.js" type="text/javascript" ></script>
+</head>
+<body>
+	<div class="manage_container">
+		<div class="manage_head">
+			<div class="manage_logo">
+				<a href="http://www.jfinal.com" target="_blank">JFinal web framework</a>
+			</div>
+			<div id="nav">
+				<ul>
+					<li><a href="/"><b>首页</b></a></li>
+					<li><a href="/blog"><b>Blog管理</b></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main">
+			#@main()
+		</div>
+	</div>
+</body>
+</html>
+#end
+
+#--
+1. 有两种模式：一行一个控件；一行并列多个控件(3个)
+2. layui-form-item 是一整行，label+input, layui-input-block，注意和 layui-input-inline 区别
+3. 如果一整行内要放多个输入框，那么再嵌套多个 layui-inline + layui-input-inline
+--#
+
+#define textInput(label, name, value, required)
+<div class="layui-form-item">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-block">
+		#if(required != 0)
+		<input type="text" class="layui-input" name="#(name)" value="#(value)" placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
+		#else
+		<input type="text" class="layui-input" name="#(name)" value="#(value)" placeholder="请输入#(label)">
+		#end
+	</div>
+</div>
+#end
+
+#define textInputInline(label, name, value, required)
+<div class="layui-inline">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-inline">
+		#if(required != 0)
+		<input type="text" class="layui-input" name="#(name)" value="#(value)"  placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
+		#else
+		<input type="text" class="layui-input" name="#(name)" value="#(value)"  placeholder="请输入#(label)">
+		#end
+	</div>
+</div>
+#end
+
+
+#define hiddenInput(name, value)
+<input type="text" class="layui-input layui-hide" id="#(name)" name="#(name)" value="#(value)" >
+#end
+
+
+#define selectInput(label, name, value, required, options)
+<div class="layui-form-item">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-block">
+		#if(required != 0)
+		<select name="#(name)" lay-search="" lay-verify="required"  lay-reqtext="#(label)不能为空">
+		#else
+		<select name="#(name)" lay-search="">
+		#end
+			<option value="">直接选择或搜索选择</option>
+			#for(it : options)
+			<option value="#(it.value)" #(value == it.value ? "selected" : "")>#(it.label)</option>
+			#end
+		</select>
+	</div>
+</div>
+#end
+
+#define selectInputInline(label, name, value, required, options)
+<div class="layui-inline">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-inline">
+		#if(required != 0)
+		<select name="#(name)" lay-search="" lay-verify="required"  lay-reqtext="#(label)不能为空">
+		#else
+		<select name="#(name)" lay-search="">
+			#end
+			<option value="">直接选择或搜索选择</option>
+			#for(it : options)
+			<option value="#(it.value)" #(value == it.value ? "selected" : "")>#(it.label)</option>
+			#end
+		</select>
+	</div>
+</div>
+#end
+
+#define radioInput(label, name, value, required, options)
+<div class="layui-form-item">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-block">
+		#for(it : options)
+		<input type="radio" name="#(name)" value="#(it.value)" title="#(it.label)" #(value == it.value ? "checked" : "") >
+		#end
+	</div>
+</div>
+#end
+
+
+#define checkInput(label, name, checkedOptions, required, options)
+<div class="layui-form-item">
+	<label class="layui-form-label">#(label)</label>
+	<div class="layui-input-block">
+		#for(it : options)
+		<input type="checkbox" name="#(name)" value="#(it.value)" title="#(it.label)"
+			   #(checkedOptions.contains(it.value) ? 'checked' : '')>
+		#end
+	</div>
+</div>
+#end
+
+
+#define textAreaInput(label, name, value, required)
+<div class="layui-form-item layui-form-text">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-block">
+		#if(required != 0)
+		<textarea name="#(name)" class="layui-textarea" placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">#(value)</textarea>
+		#else
+		<textarea name="#(name)" class="layui-textarea" placeholder="请输入#(label)">#(value)</textarea>
+		#end
+	</div>
+</div>
+#end
+
+#--
+1. chrome warning: Synchronous XMLHttpRequest on the main thread is deprecated...
+2. 原因: 通过 ajax 动态加载 html，且其中直接使用 src="abc.js"
+3. 这里是变通的做法，除此之外，也可以直接把 js 写到 HTML 的 script 中；
+--#
+#define loadJS(jsfile)
+<script>
+	$.getScript("#(jsfile)", function() {
+		// non-op
+	});
+</script>
+#end
