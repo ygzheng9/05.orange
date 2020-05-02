@@ -1,0 +1,20 @@
+<div class="layuimini-main">
+    <form class="layui-form">
+        #@hiddenInput("id", entry.id)
+
+        #@textInput("公司名称", "companyName", entry.companyName, 1)
+        #@textInput("公司代码", "companyCode", entry.companyCode, 1)
+        #@textInput("公司地址", "address", entry.address, 1)
+        #@textInput("业务板块", "bizUnit", entry.bizUnit, 1)
+
+        #@textAreaInput("备注信息", "remark", entry.remark, 0)
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+#@loadJS("/assets/js/app/company_entry.js")

@@ -1,0 +1,55 @@
+name: mock
+data:
+  -
+    category: location
+    items:
+      - 北京 杭州 宁波 绍兴 台州
+      - 上海 萧山
+  -
+    category: person
+    items:
+      - 玄冥 共工 燧人
+      - 武庚 姜尚 哪吒
+  -
+    category: phase
+    items:
+      - A B C D
+  -
+    category: department
+    items:
+      - 营销 市场 财务 人力
+      - 总裁办 生产 采购 仓库
+  -
+    category: title
+    items:
+      - 总裁 总经理 CIO VP CFO 经理
+  -
+    category: followUp
+    items:
+      - 初步 跟进中 丢单 赢
+  -
+    category: status
+    items:
+      - 签约 开工 验收
+      - 开票 清款
+  -
+    category: industry
+    items:
+      - 电力 制造 外贸 房地产 政府
+  -
+    category: priority
+    items:
+      - 高
+      - 中
+      - 低
+  -
+    category: company
+    items:
+      - 集团 能源公司 科技公司 工程公司
+      - 财务公司 供应链公司
+  -
+    category: email
+    items:
+      - '@163.com @gmail.net'
+      - '@cn.ibm.com @qq.com'
+

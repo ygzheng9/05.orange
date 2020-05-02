@@ -43,7 +43,7 @@ open class ClientService {
 
     fun deleteByBatch(ids: Array<String>): Int {
         val str: String = StrKit.join(ids, ",")
-        return Db.update("delete from t_zuser where id in($str)");
+        return Db.update("delete from t_z_user where id in($str)");
     }
 
     fun callPaginate(pageNumber: Int, pageSize: Int, clientid: Int): Page<ZClientCall> {

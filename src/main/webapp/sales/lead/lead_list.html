@@ -1,0 +1,40 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        #@textInputInline("客户名称", "clientName", "", 0)
+                        #@textInputInline("商机", "leadName", "", 0)
+                        #@textInputInline("跟进人", "leadOwner", "", 0)
+                        #@textInputInline("阶段", "leadPhase", "", 0)
+
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="topToolbar">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add"> 新增 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="deleteBatch">批量删除</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="lineToolbar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs" lay-event="details">过往</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+
+#@loadJS("/assets/js/app/lead_list.js")

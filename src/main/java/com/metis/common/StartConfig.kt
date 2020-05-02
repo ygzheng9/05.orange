@@ -1,9 +1,6 @@
 package com.metis.common
 
 
-import com.metis.common.model._MappingKit
-import com.metis.index.IndexController
-import com.metis.sales.ClientController
 import com.jfinal.config.*
 import com.jfinal.ext.handler.ContextPathHandler
 import com.jfinal.json.MixedJsonFactory
@@ -13,6 +10,15 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin
 import com.jfinal.plugin.druid.DruidPlugin
 import com.jfinal.server.undertow.UndertowServer
 import com.jfinal.template.Engine
+import com.jfinal.weixin.sdk.api.ApiConfig
+import com.jfinal.weixin.sdk.api.ApiConfigKit
+import com.jfinal.wxaapp.WxaConfig
+import com.jfinal.wxaapp.WxaConfigKit
+import com.metis.common.model._MappingKit
+import com.metis.index.IndexController
+import com.metis.sales.ClientController
+import com.metis.sales.LeadController
+import com.metis.wx.WeixinMsgController
 
 class StartConfig : JFinalConfig() {
     override fun configConstant(me: Constants) {
@@ -34,9 +40,15 @@ class StartConfig : JFinalConfig() {
     }
 
     override fun configRoute(me: Routes) {
+        me.setMappingSuperClass(true);
+
         me.add("/", IndexController::class.java, "/index")
 
+//        me.add("/wx", WeixinMsgController::class.java)
+
         me.add("/page/sales/client", ClientController::class.java, "/sales/client")
+        me.add("/page/sales/lead", LeadController::class.java, "/sales/lead")
+
     }
 
     override fun configEngine(me: Engine) {
@@ -68,6 +80,53 @@ class StartConfig : JFinalConfig() {
     override fun configHandler(me: Handlers) {
         // 在模板中使用 #(base)  获取 url 的根路径
         me.add(ContextPathHandler("base"));
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val appId = PropKit.get("appId")
+        val appSecret = PropKit.get("appSecret")
+
+        val ac = ApiConfig()
+        // 配置微信 API 相关参数
+        ac.token = PropKit.get("token")
+        ac.appId = appId
+        ac.appSecret = appSecret
+
+        /**
+         * 是否对消息进行加密，对应于微信平台的消息加解密方式：
+         * 1：true进行加密且必须配置 encodingAesKey
+         * 2：false采用明文模式，同时也支持混合模式
+         */
+        ac.isEncryptMessage = PropKit.getBoolean("encryptMessage", false)
+        ac.encodingAesKey = PropKit.get("encodingAesKey", "setting it in config file")
+
+        /**
+         * 多个公众号时，重复调用ApiConfigKit.putApiConfig(ac)依次添加即可，第一个添加的是默认。
+         */
+        ApiConfigKit.putApiConfig(ac)
+        ApiConfigKit.setDevMode(true)
+
+        /**
+         * 1.9 新增LocalTestTokenCache用于本地和线上同时使用一套appId时避免本地将线上AccessToken冲掉
+         *
+         * 设计初衷：https://www.oschina.net/question/2702126_2237352
+         *
+         * 注意：
+         * 1. 上线时应保证此处isLocalDev为false，或者注释掉该不分代码！
+         *
+         * 2. 为了安全起见，此处可以自己添加密钥之类的参数，例如：
+         * http://localhost/weixin/api/getToken?secret=xxxx
+         * 然后在WeixinApiController#getToken()方法中判断secret
+         *
+         * @see WeixinApiController.getToken
+         */
+
+        val wc = WxaConfig()
+        wc.appId = appId
+        wc.appSecret = appSecret
+        WxaConfigKit.setWxaConfig(wc)
     }
 
     companion object {

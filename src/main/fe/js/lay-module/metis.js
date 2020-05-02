@@ -5,9 +5,12 @@
  * description: metis 辅助函数
  */
 
-layui.define(["jquery", "miniPage", "layer", "table"], function (exports) {
-    const { $, miniPage, layer, table } = layui;
+layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
+    exports
+) {
+    const { $, miniPage, layer, table, form } = layui;
 
+    // 全局共享数据
     const state = {
         clientid: 0,
     };
@@ -70,14 +73,98 @@ layui.define(["jquery", "miniPage", "layer", "table"], function (exports) {
             });
         },
 
+        // 2020/05/01: 单一表单的新增和修改
+        bindFormSave: function (options) {
+            // tableId: 是 form 关闭后，需要刷新的 table
+            // beforeSave: 保存前的校验，返回 true 则继续保存，false 则终止；
+            const { action, tableId, beforeSave } = options;
+
+            // 当前弹出层，防止ID被覆盖
+            const parentIndex = layer.index;
+
+            function errHandler(res) {
+                // 服务没有返回，也即：服务故障
+                const index = layer.alert(
+                    "保存失败，请检查数据格式",
+                    {
+                        title: "操作失败",
+                    },
+                    function () {
+                        // 关闭弹出层
+                        layer.close(index);
+                    }
+                );
+            }
+
+            function okHandler(res) {
+                // 服务有返回码，返回码可以是 ok，fail
+                if (res.state === "ok") {
+                    const index = layer.msg(
+                        "保存成功",
+                        {
+                            time: 300,
+                        },
+                        function () {
+                            table.reload(tableId);
+                            // 关闭弹出层
+                            layer.close(index);
+                            layer.close(parentIndex);
+                        }
+                    );
+                } else {
+                    const index = layer.alert(
+                        "保存失败，请稍后重试",
+                        {
+                            title: "操作失败",
+                        },
+                        function () {
+                            // 关闭弹出层
+                            layer.close(index);
+                        }
+                    );
+                }
+            }
+
+            function trimAll(field) {
+                // 去除所有空格
+                for (var key in field) {
+                    var item = field[key];
+                    field[key] =
+                        typeof item.trim === "function" ? item.trim() : item;
+                }
+
+                return field;
+            }
+
+            /**
+             * 初始化表单，要加上，不然刷新部分组件可能会不加载
+             */
+            form.render();
+            form.on("submit(saveBtn)", function (data) {
+                // 去除所有空格
+                const field = trimAll(data.field);
+
+                if (beforeSave !== undefined) {
+                    if (!beforeSave(field)) {
+                        console.log("beforeSave failed.");
+                        return false;
+                    }
+                }
+
+                $.post(action, {
+                    param: JSON.stringify(field),
+                }).then(okHandler, errHandler);
+
+                return false;
+            });
+        },
+
         // 2020/04/11: 绑定 table 的事件，包括顶部的 toolbar 和每一行的 toolbar
         bindTableEvent: function (filter, handlerMap) {
             // 从 map 中找到匹配的 event，并调用
             function fireEvent(obj) {
                 const { event, data } = obj;
                 const fn = handlerMap[event];
-
-                // console.log(obj);
 
                 if (fn === undefined && fn === null) {
                     console.log(`Error: ${event} not defined.`);
@@ -96,6 +183,14 @@ layui.define(["jquery", "miniPage", "layer", "table"], function (exports) {
             table.on(`tool(${filter})`, function (obj) {
                 fireEvent(obj);
             });
+        },
+
+        isEmpty: function (obj) {
+            if (typeof obj === "undefined" || obj === null || obj === "") {
+                return true;
+            } else {
+                return false;
+            }
         },
     };
 

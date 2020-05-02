@@ -20,6 +20,10 @@ where 1 = 1
 #if(city)
   AND city = #para(city)
 #end
+#if(keyword)
+  and ( (userName like concat('%', #para(keyword), '%')) or
+        (email like concat('%', #para(keyword), '%')) )
+#end
 order by id asc
 #end
 
@@ -89,3 +93,102 @@ from t_z_client_contact a
 where a.clientId = #para(0)
 ;
 #end
+
+
+### 商机查询部分
+
+#sql("findLead")
+select *
+from t_z_lead_info
+where 1 = 1
+#if(clientName)
+  AND clientName like concat('%', #para(clientName), '%')
+#end
+#if(leadName)
+AND leadName like concat('%', #para(leadName), '%')
+#end
+#if(leadOwner)
+AND leadOwner like concat('%', #para(leadOwner), '%')
+#end
+#if(leadPhase)
+AND leadPhase like concat('%', #para(leadPhase), '%')
+#end
+order by id asc
+#end
+
+### 后面有分页，所以这里结束不能有分号;
+
+#--
+;
+--#
+
+### 公司基本信息
+#sql("findCompany")
+select *
+from t_z_company
+where 1 = 1
+#if(companyName)
+  AND companyName like concat('%', #para(companyName), '%')
+#end
+#if(bizUnit)
+AND bizUnit like concat('%', #para(bizUnit), '%')
+#end
+#if(companyCode)
+AND companyCode like concat('%', #para(companyCode), '%')
+#end
+#if(address)
+AND address like concat('%', #para(address), '%')
+#end
+#if(keyword)
+AND ( (companyName like concat('%', #para(keyword), '%')) or
+      (companyCode like concat('%', #para(keyword), '%')) )
+#end
+order by id asc
+#end
+
+### 后面有分页，所以这里结束不能有分号;
+
+#--
+;
+--#
+
+
+### 部门基本信息
+#sql("findDepartmentById")
+select dept.*,
+       comp.companyName,
+       usr.userName
+from t_z_department dept
+         left join t_z_company comp on comp.id = dept.companyId
+         left join t_z_user usr on usr.id = dept.headId
+where dept.id = #para(0);
+#end
+
+#sql("findDepartment")
+select dept.*,
+       comp.companyName,
+       usr.userName
+from t_z_department dept
+left join t_z_company comp on comp.id = dept.companyId
+left join t_z_user usr on usr.id = dept.headId
+where 1 = 1
+#if(companyId)
+  AND dept.companyId = #para(companyId)
+#end
+#if(departmentName)
+  AND dept.departmentName like concat('%', #para(departmentName), '%')
+#end
+#if(departmentCode)
+  AND dept.departmentCode like concat('%', #para(departmentCode), '%')
+#end
+#if(headId)
+  AND dept.headId = #para(headId)
+#end
+order by id asc
+#end
+
+### 后面有分页，所以这里结束不能有分号;
+
+#--
+;
+--#

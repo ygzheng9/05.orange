@@ -48,6 +48,18 @@
           "target": "_self"
         },
         {
+          "title": "公司管理",
+          "href": "companyList",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
+          "title": "部门管理",
+          "href": "departmentList",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
           "title": "菜单管理",
           "href": "page/menu.html",
           "icon": "fa fa-window-maximize",
@@ -196,7 +208,7 @@
             },
             {
               "title": "商机列表",
-              "href": "page/sales/lead/listLead",
+              "href": "page/sales/lead/index",
               "icon": "fa fa-dot-circle-o",
               "target": "_self"
             },

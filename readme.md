@@ -61,7 +61,34 @@
 ## 2020/04/11
 1. create new orange from sugar
 2. only keep layUI and remove api for stats
-3. 添加 -parameters 后需要重新 build 项目，否则 warning 不会消失    
+3. 添加 -parameters 后需要重新 build 项目，否则 warning 不会消失
+4. layui 
+    1. table 工具栏事件绑定
+    2. form 提交事件绑定，提交后刷新 table
+    3. miniPage.renderPageTitle 去掉当前菜单项中的 querystring
+    
+## 2020/04/26
+1. jFinal 运行机制
+2. 读取 resources 目录下的文件
+    1. properties 文件
+    2. yaml 文件
+3. jUnit5 的单元测试
+4. 尽量不使用 data class，而直接使用 POPJ
+    1. 无参构造函数
+5. MD5 加密与验证        
+    
+##  2020/05/01
+1. form中，lable + input 所占比例可灵活调整；
+2. form save 变成共用函数；
+3. 从 yaml 中加载 mock data; 
+    
+    
+##  2020/05/02
+1. CRUD: company, department
+2. 日期选择
+3. dropdown table 选择
+4. form 内部元素选择：formId + inputClass  
+5. activeRecord 底层是 map，效果是动态属性：即使没有声明属性字段，只要 sql 中有字段，就可以直接拿来用  
     
 ## todo 
 1. upload

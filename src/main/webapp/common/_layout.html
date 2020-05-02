@@ -38,9 +38,9 @@
 	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
 	<div class="layui-input-block">
 		#if(required != 0)
-		<input type="text" class="layui-input" name="#(name)" value="#(value)" placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)" placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
 		#else
-		<input type="text" class="layui-input" name="#(name)" value="#(value)" placeholder="请输入#(label)">
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)" placeholder="请输入#(label)">
 		#end
 	</div>
 </div>
@@ -51,9 +51,23 @@
 	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
 	<div class="layui-input-inline">
 		#if(required != 0)
-		<input type="text" class="layui-input" name="#(name)" value="#(value)"  placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)"  placeholder="请输入#(label)" lay-verify="required" lay-reqtext="#(label)不能为空">
 		#else
-		<input type="text" class="layui-input" name="#(name)" value="#(value)"  placeholder="请输入#(label)">
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)"  placeholder="请输入#(label)">
+		#end
+	</div>
+</div>
+#end
+
+
+#define numberInputInline(label, name, value, required)
+<div class="layui-inline">
+	<label class="layui-form-label #(required != 0 ? 'required' : '')">#(label)</label>
+	<div class="layui-input-inline">
+		#if(required != 0)
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)"  placeholder="请输入#(label)" lay-verify="required|number" lay-reqtext="#(label)不能为空">
+		#else
+		<input type="text" class="layui-input #(name)" id="id_#(name)" name="#(name)" value="#(value)"  placeholder="请输入#(label)" lay-verify="number">
 		#end
 	</div>
 </div>
@@ -61,7 +75,7 @@
 
 
 #define hiddenInput(name, value)
-<input type="text" class="layui-input layui-hide" id="#(name)" name="#(name)" value="#(value)" >
+<input type="text" class="layui-input layui-hide #(name)" id="#(name)" name="#(name)" value="#(value)" >
 #end
 
 

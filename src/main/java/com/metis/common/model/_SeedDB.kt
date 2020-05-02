@@ -1,10 +1,8 @@
 package com.metis.common.model
 
-import cn.hutool.core.util.StrUtil
 import com.metis.common.StartConfig.Companion.createDruidPlugin
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin
 import com.jfinal.plugin.activerecord.Db
-import kotlin.random.Random
 
 
 fun main() {
@@ -24,23 +22,14 @@ fun main() {
 
     // 通过上面简单的几行代码，即可立即开始使用
 //    seedOpp()
-    seedClientContact()
+//    seedClientContact()
+
+//    saveZUser()
 
     println("done.")
-
 }
 
 
-// 从 list 中随机返回一个值
-fun <T> getRandom(list: List<T>): T {
-    val i = Random.nextInt(0, list.size)
-    return list[i]
-}
-
-// 编码前面补零
-fun padPre(i: Int, l: Int) : String {
-    return StrUtil.padPre("$i", l, "0")
-}
 
 fun seedZUser() {
     // 模拟数据的总条数
@@ -66,6 +55,16 @@ fun seedZUser() {
             .set("sex", getRandom(sex))
             .save();
     }
+}
+
+fun saveZUser() {
+    ZUser().set("userName", "用户 1")
+        .set("email", "wowo@gmail.com")
+        .set("company", "getRandom(companies)")
+        .set("department", "getRandom(departments)")
+        .set("city", "getRandom(cities)")
+        .set("sex", "getRandom(sex)")
+        .save();
 }
 
 
@@ -133,3 +132,6 @@ fun seedClientContact() {
             .save();
     }
 }
+
+
+

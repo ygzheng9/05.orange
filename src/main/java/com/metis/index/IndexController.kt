@@ -1,9 +1,7 @@
 package com.metis.index
 
-import cn.hutool.core.io.FileUtil
 import cn.hutool.core.util.StrUtil
 
-import com.metis.common.LayerTable
 import com.metis.common.model.ZUser
 
 import com.jfinal.aop.Inject
@@ -11,15 +9,26 @@ import com.jfinal.core.Controller
 import com.jfinal.kit.JsonKit
 import com.jfinal.kit.Kv
 import com.jfinal.kit.Ret
-import com.jfinal.template.Engine
 import com.metis.common.buildLayuiTable
+import com.metis.common.model.ZCompany
+import com.metis.common.model.ZDepartment
 
 class IndexController : Controller() {
     @Inject
     lateinit var userSvc: UserService
 
+    @Inject
+    lateinit var companySvc: CompanyService
+
+    @Inject
+    lateinit var departmentSvc: DepartmentService
+
     fun index() {
         render("index.html")
+    }
+
+    fun rxjs() {
+        render("rxjs.html")
     }
 
     fun welcomePage1() {
@@ -50,7 +59,10 @@ class IndexController : Controller() {
         // layui table 上面的查询条件传入
         val params = get("params", "")
 
-        val users = userSvc.paginate(pageNum, pageSize, params)
+        // 下拉选择时，查询条件
+        val keyword = get("keyword", "")
+
+        val users = userSvc.paginate(pageNum, pageSize, params, keyword)
 
         val results = buildLayuiTable(users)
 
@@ -113,6 +125,125 @@ class IndexController : Controller() {
 
         // 根据 id 判断是 更新 还是 新增
         val op = if (user.id > 0) user::update else user::save
+        if ( op.invoke() ) {
+            renderJson(Ret.ok())
+        } else {
+            renderJson(Ret.fail())
+        }
+    }
+
+    ///////////// company
+    fun companyList() {
+        render("company_list.html")
+    }
+
+    fun companyFind() {
+        // layUI 分页默认是这两个参数名
+        val pageNum = getInt("page", 1)
+        val pageSize = getInt("limit", 20)
+
+        // layui table 上面的查询条件传入
+        val params = get("params", "")
+        val keyword = get("keyword", "")
+
+        val items = companySvc.paginate(pageNum, pageSize, params, keyword)
+
+        val results = buildLayuiTable(items)
+
+        renderJson(results)
+    }
+
+    fun companyDelete() {
+        val id = getInt("id", 0)
+        companySvc.deleteById(id)
+        renderJson(Ret.ok())
+    }
+
+    fun companyDeleteBatch() {
+        val param = get("param", "")
+        val ids = JsonKit.parse(param, Array<String>::class.java)
+        companySvc.deleteByBatch(ids)
+        renderJson(Ret.ok())
+    }
+
+    fun companyEntry() {
+        var entry = ZCompany()
+        entry.id = 0
+
+        val id = getInt("id", 0)
+        if (id > 0) {
+            entry = companySvc.findById(id)
+        }
+
+        set("entry", entry)
+        render("company_entry.html")
+    }
+
+    fun companyCreateOrUpdate() {
+        val param = get("param", "")
+        val entry = JsonKit.parse(param, ZCompany::class.java)
+
+        // 根据 id 判断是 更新 还是 新增
+        val op = if (entry.id > 0) entry::update else entry::save
+        if ( op.invoke() ) {
+            renderJson(Ret.ok())
+        } else {
+            renderJson(Ret.fail())
+        }
+    }
+
+    ///////////// department
+    fun departmentList() {
+        render("department_list.html")
+    }
+
+    fun departmentFind() {
+        // layUI 分页默认是这两个参数名
+        val pageNum = getInt("page", 1)
+        val pageSize = getInt("limit", 20)
+
+        // layui table 上面的查询条件传入
+        val params = get("params", "")
+
+        val items = departmentSvc.paginate(pageNum, pageSize, params)
+
+        val results = buildLayuiTable(items)
+
+        renderJson(results)
+    }
+
+    fun departmentDelete() {
+        val id = getInt("id", 0)
+        departmentSvc.deleteById(id)
+        renderJson(Ret.ok())
+    }
+
+    fun departmentDeleteBatch() {
+        val param = get("param", "")
+        val ids = JsonKit.parse(param, Array<String>::class.java)
+        departmentSvc.deleteByBatch(ids)
+        renderJson(Ret.ok())
+    }
+
+    fun departmentEntry() {
+        var entry = ZDepartment()
+        entry.id = 0
+
+        val id = getInt("id", 0)
+        if (id > 0) {
+            entry = departmentSvc.findById(id)
+        }
+
+        set("entry", entry)
+        render("department_entry.html")
+    }
+
+    fun departmentCreateOrUpdate() {
+        val param = get("param", "")
+        val entry = JsonKit.parse(param, ZDepartment::class.java)
+
+        // 根据 id 判断是 更新 还是 新增
+        val op = if (entry.id > 0) entry::update else entry::save
         if ( op.invoke() ) {
             renderJson(Ret.ok())
         } else {
