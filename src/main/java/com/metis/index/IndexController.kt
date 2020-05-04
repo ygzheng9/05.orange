@@ -1,9 +1,7 @@
 package com.metis.index
 
 import cn.hutool.core.util.StrUtil
-
-import com.metis.common.model.ZUser
-
+import com.jfinal.aop.Clear
 import com.jfinal.aop.Inject
 import com.jfinal.core.Controller
 import com.jfinal.kit.JsonKit
@@ -12,6 +10,7 @@ import com.jfinal.kit.Ret
 import com.metis.common.buildLayuiTable
 import com.metis.common.model.ZCompany
 import com.metis.common.model.ZDepartment
+import com.metis.common.model.ZUser
 
 class IndexController : Controller() {
     @Inject
@@ -23,12 +22,28 @@ class IndexController : Controller() {
     @Inject
     lateinit var departmentSvc: DepartmentService
 
-    fun index() {
-        render("index.html")
-    }
+    @Inject
+    lateinit  var loginSvc: LoginService
 
+    // 演示专用
     fun rxjs() {
         render("rxjs.html")
+    }
+
+    fun demoWelcome() {
+        render("demo/welcome.html");
+    }
+
+    fun demoUpload() {
+        val f = file
+        println(f)
+
+        renderJson(Ret.ok())
+    }
+
+    // 正式开始
+    fun index() {
+        render("index.html")
     }
 
     fun welcomePage1() {
@@ -47,6 +62,43 @@ class IndexController : Controller() {
         render("form.html");
     }
 
+    @Clear(LoginInterceptor::class, AuthInterceptor::class)
+    fun login() {
+        render("login.html")
+    }
+
+    @Clear(LoginInterceptor::class, AuthInterceptor::class)
+    fun doLogin() {
+        val param = get("param", "")
+        val kv = JsonKit.parse(param, Kv::class.java)
+
+        val ret: Ret = loginSvc.login(kv.getStr("email"), kv.getStr("password"), true)
+        if (ret.isOk) {
+            val sessionId = ret.getStr(LoginService.sessionIdName)
+            val maxAgeInSeconds = ret.getInt("maxAgeInSeconds")
+            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true)
+            set(LoginService.loginAccountCacheName, ret[LoginService.loginAccountCacheName])
+
+            // 如果 returnUrl 存在则跳过去，否则跳去首页
+            ret["returnUrl"] = getPara("returnUrl", "/")
+        }
+        renderJson(ret)
+    }
+
+    @Clear(LoginInterceptor::class, AuthInterceptor::class)
+    fun page404() {
+        render("404.html")
+    }
+
+    fun logout() {
+        // 退出后，删除 cookie
+        removeCookie(LoginService.sessionIdName)
+        forwardAction("/login")
+    }
+
+
+    // 业务逻辑
+    // user 管理
     fun userList() {
         render("user/list.html")
     }
@@ -88,7 +140,7 @@ class IndexController : Controller() {
         user.sex = "未知"
 
         val id = getInt("id", 0)
-        if (id > 0) {
+        if (id > 0 ) {
             user = userSvc.findById(id)
         }
 
@@ -101,13 +153,10 @@ class IndexController : Controller() {
         val companies = getOptions(listOf("集团", "能源公司", "科技公司", "工程公司", "财务公司", "供应链公司"));
         val genders = getOptions(listOf("男", "女", "未知"))
 
-        val roleList = ArrayList<String>()
-        for (i in 1..30) {
-            roleList.add("角色-$i")
-        }
+        val roleList = listOf("admin", "root", "user")
+
         val roles = getOptions(roleList)
         val checkedRoles = StrUtil.split(user.roles, ' ', true, true)
-//        println(checkedRoles)
 
         set("user", user)
         set("cities", cities)
@@ -124,7 +173,7 @@ class IndexController : Controller() {
         val user = JsonKit.parse(param, ZUser::class.java)
 
         // 根据 id 判断是 更新 还是 新增
-        val op = if (user.id > 0) user::update else user::save
+        val op = if (user.id != 0) user::update else user::save
         if ( op.invoke() ) {
             renderJson(Ret.ok())
         } else {

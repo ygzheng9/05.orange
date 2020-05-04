@@ -11,24 +11,25 @@
 // })();
 
 layui
-  .config({
-    base: '/assets/js/lay-module/',
-    version: false,
-  })
-  .extend({
-    miniAdmin: 'layuimini/miniAdmin', // layuimini后台扩展
-    miniMenu: 'layuimini/miniMenu', // layuimini菜单扩展
-    miniPage: 'layuimini/miniPage', // layuimini 单页扩展，CAUTION: 本地有修改
-    miniTheme: 'layuimini/miniTheme', // layuimini 主题扩展
-    miniTongji: 'layuimini/miniTongji', // layuimini 统计扩展
+    .config({
+        base: "/assets/js/lay-module/",
+        version: false,
+    })
+    .extend({
+        miniAdmin: "layuimini/miniAdmin", // layuimini后台扩展
+        miniMenu: "layuimini/miniMenu", // layuimini菜单扩展
+        miniPage: "layuimini/miniPage", // layuimini 单页扩展，CAUTION: 本地有修改
+        miniTheme: "layuimini/miniTheme", // layuimini 主题扩展
+        miniTongji: "layuimini/miniTongji", // layuimini 统计扩展
 
-    step: 'step-lay/step', // 分步表单扩展
-    treetable: 'treetable-lay/treetable', //table树形扩展
-    tableSelect: 'tableSelect/tableSelect', // table选择扩展
-    iconPickerFa: 'iconPicker/iconPickerFa', // fa图标选择扩展
+        step: "step-lay/step", // 分步表单扩展
+        treetable: "treetable-lay/treetable", //table树形扩展
+        tableSelect: "tableSelect/tableSelect", // table选择扩展
+        iconPickerFa: "iconPicker/iconPickerFa", // fa图标选择扩展
 
-    wangEditor: 'wangEditor/wangEditor', // wangEditor富文本扩展
-    layarea: 'layarea/layarea', //  省市县区三级联动下拉选择器
+        wangEditor: "wangEditor/wangEditor", // wangEditor富文本扩展
+        layarea: "layarea/layarea", //  省市县区三级联动下拉选择器
 
-    metis: 'metis',
-  });
+        dropdown: "dropdown/dropdown",
+        metis: "metis",
+    });

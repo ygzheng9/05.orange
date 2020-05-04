@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>METIS</title>
+    <meta name="keywords" content="layuimini,layui" />
+    <meta name="description" content="基于 layuimini" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/assets/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/layuimini.css?v=2.0.1" media="all" />
+    <link rel="stylesheet" href="/assets/css/public.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/dropdown.css" media="all" />
+
+    <link rel="stylesheet" href="/assets/lib/jq-module/zyupload/zyupload-1.0.0.min.css" media="all" />
+
+    <style id="layuimini-bg-color"></style>
+
+    <style>
+        em, i { font-style: normal; }
+        .nav-tree-main .layui-nav-item > a i { margin-right: 10px; }
+        .nav-tree-main .layui-nav-item > .layui-nav-child dd a { padding-left: 40px; }
+        #menuBar { cursor: pointer; color: #fff; position: absolute; left: 0; top: 0; margin: 22px; }
+        .layui-layout-admin .layui-logo { left: 64px; text-align: left; color: #fff; }
+
+        /* 左侧栏 *** 向左折叠 mini-sidebar */
+
+        .mini-sidebar .layui-layout-admin .layui-side { width: 48px; overflow-x: visible; }
+        .mini-sidebar .layui-layout-admin .layui-side:hover .layui-side-scroll { width: 268px; }
+        .mini-sidebar .nav-tree-main .layui-side-scroll { width: 48px; overflow-x: initial; }
+        .mini-sidebar .nav-tree-main.layui-nav-tree { width: 48px !important; }
+        .mini-sidebar .nav-tree-main.layui-nav-tree .layui-nav-item { position: relative; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item > .layui-nav-child { position: absolute; left: 48px; top: 0; width: 200px;
+            background-color: rgba(57,61,73,.9)!important;display: none; z-index: 9999;border-radius: 0; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item > .layui-nav-child dd a { line-height: 40px; text-align: left; padding: 0 20px;
+            color: #fff; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item:hover > .layui-nav-child { display: block; }
+
+        .mini-sidebar .nav-tree-main > .layui-nav-item a { padding: 10px 0 0 0; line-height: 15px; text-align: center; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item > a > .sideIcons { margin: 0 auto; }
+        .mini-sidebar .nav-tree-main .icon { line-height: 12px; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item a > .cite { display: block; line-height: 12px; padding-top: 5px; font-size: 12px; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item .cite em { display: none; }
+        .mini-sidebar .nav-tree-main > .layui-nav-item .layui-nav-child dd .cite{ line-height:40px; padding:0;}
+        .mini-sidebar .nav-tree-main > .layui-nav-item > a .layui-nav-more { display: none; }
+        .mini-sidebar .nav-tree-main .sub-nav .layui-nav-item a { line-height: 40px; text-align: left; padding: 0 20px; color: #b4bcc8; }
+        .mini-sidebar .nav-tree-main .sub-nav .layui-nav-item .layui-nav-more { display: block; }
+        .mini-sidebar .layui-body { left: 48px; }
+        .mini-sidebar .nav-tree-main .layui-nav-item > a i{ margin:0 auto;}
+
+        /*右侧*/
+        .layui-fluid{ padding:15px;}
+        .wMain-col-bg1,.wMain-col-bg2{background: #79C48C; text-align: center; padding:24px; color: #fff;}
+        .wMain-col-bg2{background: #63BA79;}
+
+        .zContent {height: 2000px;}
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin zContent">
+    <div class="layui-header header">
+        <a href="javascript:;">
+            <!--layui-icon-spread-left-->
+            <i class="layui-icon layui-icon-shrink-right" id="menuBar"></i>
+        </a>
+        <div class="layui-logo">后台管理</div>
+    </div>
+    <div class="layui-side layui-bg-black leftMenuDiv">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree nav-tree-main" lay-shrink="all">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;"><i class="layui-icon"></i><span class="cite">文件<em>内容</em></span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;"><span class="cite">文件管理</span></a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;">三级</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a href="javascript:;">四级</a></dd>
+                                        <dd><a href="javascript:;">四级</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd><a href="javascript:;">三级</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a href="javascript:;">四级</a></dd>
+                                        <dd><a href="javascript:;">四级</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd><a href="javascript:;">三级</a></dd>
+                            </dl>
+                        </dd>
+                        <dd><a href="javascript:;"><span class="cite">文件管理2</span></a></dd>
+                        <dd><a href="javascript:;"><span class="cite">文件管理3</span></a></dd>
+                        <dd><a href="javascript:;"><span class="cite">文件管理4</span></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;"><i class="layui-icon"></i><span class="cite">图片<em>内容</em></span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;"><span class="cite">图片管理</span></a></dd>
+                        <dd><a href="javascript:;"><span class="cite">图片管理2</span></a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md9">
+                    你的内容 9/12
+
+                    <br>
+
+
+                    导航：水平 - 垂直 - 侧边
+                    <hr class="layui-bg-red">
+
+                    <ul class="layui-nav" lay-filter="testHorizon">
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">默认展开</a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;">选项1</a></dd>
+                                <dd><a href="javascript:;">选项2</a></dd>
+                                <dd><a href="">跳转</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">解决方案</a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="">移动模块</a></dd>
+                                <dd><a href="">后台模版</a></dd>
+                                <dd><a href="">电商平台</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="">产品</a></li>
+                        <li class="layui-nav-item"><a href="">大数据</a></li>
+                    </ul>
+
+                    上载。。。。
+                    <hr class="layui-bg-red">
+                    <div id="id_zyupload" class="zyupload"></div>
+
+
+                    <br>
+                    <button type="button" class="layui-btn" id="id_richtext">显示</button>
+                    <button type="button" class="layui-btn" id="id_richtext_set">设置</button>
+
+                    <div id="id_wangEditor">
+                        <p>欢迎使用 wangEditor 富文本编辑器</p>
+                    </div>
+
+                    <br>
+
+
+                </div>
+                <div class="layui-col-md3 wMain-col-bg2">
+                    你的内容 3/12
+
+                    <ul class="layui-nav layui-nav-tree" lay-filter="testVertical">
+                        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a href="javascript:;">默认展开</a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;">选项1</a></dd>
+                                <dd><a href="">跳转</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="">产品</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/assets/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/assets/js/lay-config.js" charset="utf-8"></script>
+
+<script src="/assets/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/assets/lib/ramda.min.js" charset="utf-8"></script>
+
+<script src="/assets/lib/echart/echarts.min.js" charset="utf-8"></script>
+<script src="/assets/lib/echart/shine.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="/assets/lib/jq-module/wangEditor.min.js"></script>
+
+<script type="text/javascript" src="/assets/lib/jq-module/zyupload/zyupload-1.0.0.min.js"></script>
+
+
+<script>
+    layui.use(['layer', 'form', 'element'], function () {
+        var layer = layui.layer
+            , form = layui.form
+            , $ = layui.jquery;
+
+        // 左侧栏向左折叠
+        $("#menuBar").on('click', function () {
+            if ($("body").hasClass("mini-sidebar")) {
+                $("body").removeClass("mini-sidebar");
+                $(this).addClass("layui-icon-shrink-right");
+                $(this).removeClass("layui-icon-spread-left");
+            } else {
+                $("body").addClass("mini-sidebar");
+                $(this).removeClass("layui-icon-shrink-right");
+                $(this).addClass("layui-icon-spread-left");
+            }
+        });
+
+        // 富文本
+        var E = window.wangEditor
+        var editor = new E('#id_wangEditor')
+        // 自定义菜单配置
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            // 'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'emoticon',  // 表情
+            // 'image',  // 插入图片
+            'table',  // 表格
+            // 'video',  // 插入视频
+            'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+        ];
+        editor.create();
+
+        $("#id_richtext").on('click', function(e) {
+            const json = editor.txt.getJSON()  // 获取 JSON 格式的内容
+            const jsonStr = JSON.stringify(json)
+            console.log(json)
+            console.log(jsonStr)
+
+            console.log(editor.txt.html());
+        });
+
+        $("#id_richtext_set").on('click', function(e) {
+            const c = `<p>很容易使用，</p><p><br></p><p>给你点<span style="color: rgb(194, 79, 74);">颜色</span>看看</p><ol><li><span style="background-color: rgb(194, 79, 74);">北京</span></li><li><span style="background-color: rgb(194, 79, 74);">上海</span></li><li><span style="background-color: rgb(194, 79, 74);">广州</span></li><li><span style="background-color: rgb(194, 79, 74);">深圳</span></li></ol>`;
+            editor.txt.html(c);
+        });
+
+        // 文件上载
+        // 初始化插件
+        $("#id_zyupload").zyUpload({
+            width: "650px",                 // 宽度
+            height: "400px",                 // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "demoUpload",  // 上传文件的路径
+            fileType: ["jpg", "png", "txt", "js", "exe"],// 上传文件的类型
+            fileSize: 51200000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: true,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,  				  // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                console.info("此文件上传成功：");
+                console.info(file.name);
+                console.info("此文件上传到服务器地址：");
+                console.info(response);
+                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+            },
+            onComplete: function (response) {           	  // 上传完成的回调方法
+                console.info("文件上传完成");
+                console.info(response);
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

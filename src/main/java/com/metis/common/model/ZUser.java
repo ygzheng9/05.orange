@@ -7,5 +7,9 @@ import com.metis.common.model.base.BaseZUser;
  */
 @SuppressWarnings("serial")
 public class ZUser extends BaseZUser<ZUser> {
-	
+
+    public ZUser removeSensitiveInfo() {
+        remove("password", "salt");
+        return this;
+    }
 }

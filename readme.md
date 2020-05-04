@@ -90,6 +90,27 @@
 4. form 内部元素选择：formId + inputClass  
 5. activeRecord 底层是 map，效果是动态属性：即使没有声明属性字段，只要 sql 中有字段，就可以直接拿来用  
     
+##  2020/05/03
+1. js 中动态填充 select 的选项；
+2. 一行：一个 label，多个 select 并列；
+3. dropdown
+    1. 点击触发
+    2. 可以响应 dropdown 选项的事件；
+4. y-admin: https://github.com/C-GY/Y-Admin      
+
+
+##  2020/05/04
+1. 富文本编辑器：wangEditor
+    1. 内容可以按照 html 格式读取，即可保存到 db 中；
+    2. 从 db 中读取后，也可以设置初始值；
+2. upload
+    1. layui
+    2. zyUpload
+    3. jfinal upload 
+        1. getFile 文件已经从客户端上载到服务器，并且保存在服务器的指定目录下；
+        2. 文件名和上载文件名相同；    
+  
+    
 ## todo 
 1. upload
 2. action 中获取当前的 actionKey     

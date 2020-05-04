@@ -15,10 +15,11 @@ import com.jfinal.weixin.sdk.api.ApiConfigKit
 import com.jfinal.wxaapp.WxaConfig
 import com.jfinal.wxaapp.WxaConfigKit
 import com.metis.common.model._MappingKit
+import com.metis.index.AuthInterceptor
 import com.metis.index.IndexController
+import com.metis.index.LoginInterceptor
 import com.metis.sales.ClientController
 import com.metis.sales.LeadController
-import com.metis.wx.WeixinMsgController
 
 class StartConfig : JFinalConfig() {
     override fun configConstant(me: Constants) {
@@ -75,11 +76,17 @@ class StartConfig : JFinalConfig() {
 
     }
 
-    override fun configInterceptor(me: Interceptors) {}
+    override fun configInterceptor(me: Interceptors) {
+        // 全局拦截器
+        me.add(LoginInterceptor())
+        me.add(AuthInterceptor())
+    }
 
     override fun configHandler(me: Handlers) {
         // 在模板中使用 #(base)  获取 url 的根路径
         me.add(ContextPathHandler("base"));
+
+
     }
 
     override fun onStart() {

@@ -192,6 +192,33 @@ layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
                 return false;
             }
         },
+
+        selectFillOptions: function (domid, items, value, label) {
+            // [{value: "A", label: "上海"}]
+            // 删除原有选项
+            $(domid).empty();
+
+            // 增加一个空白项
+            var first = `请选择`;
+            if (label != undefined) {
+                first = label;
+            }
+            $(domid).append(`<option value=''>${first}</option>`);
+
+            // 遍历 items，生成新的 options
+            $.each(items, function (k, item) {
+                var selected = "";
+                if (value !== undefined && value === item.value) {
+                    selected = "selected";
+                }
+
+                const option = `<option value=${item.value} ${selected}>${item.label}</option>`;
+                $(domid).append(option);
+            });
+
+            // 刷新，使得  layui select 正常显示
+            form.render("select");
+        },
     };
 
     exports("metis", metis);

@@ -184,3 +184,71 @@
         </div>
     </div>
 </div>
+
+功能演示
+<hr class="layui-bg-red">
+
+<!-- 演示：dropdown -->
+<button class="layui-btn layui-btn-sm"
+        lay-filter="test1"
+        lay-dropdown="{menus: [{layIcon:'layui-icon-username',txt: '个人中心', event:'usercenter'}, {layIcon: 'layui-icon-set',txt: '设置', event:'set'}, {layIcon: 'layui-icon-logout', txt: '退出登录', event:'loginout'}]}">
+    <span>下拉菜单</span>
+    <i class="layui-icon layui-icon-triangle-d"></i>
+</button>
+
+<button
+        class="layui-btn layui-btn-sm"
+        lay-filter="test2"
+        lay-dropdown="{template: '#custMenu'}"
+>
+    <span>自定义下拉内容</span>
+    <i class="layui-icon layui-icon-triangle-d"></i>
+</button>
+
+<!-- 下拉内容自定义模板 -->
+<script id="custMenu" type="text/html">
+    <div>
+        <p>我是自定义下拉内容</p>
+    </div>
+</script>
+
+<!-- 演示：通过 js 填充 select 的 options -->
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属分类</label>
+        <div class="layui-input-inline">
+            <select id="id_selectProvince" name="selectProvince" class="select" lay-filter="filter_selectProvince"></select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="id_selectCity" name="selectCity" class="select" lay-filter="filter_selectCity"></select>
+        </div>
+        <div class="layui-input-inline">
+            <select id="id_selectAres" name="selectArea" class="select" lay-filter="filter_selectArea"></select>
+        </div>
+    </div>
+</form>
+
+<script>
+    layui.use(['dropdown', 'metis'], function () {
+        var dropdown = layui.dropdown;
+        var metis = layui.metis;
+
+        // 监听菜单点击
+        dropdown.onFilter('test1', function (event) {
+            // ...业务代码
+            console.log(event);
+        })
+
+        dropdown.onFilter('test2', function (event) {
+            // ...业务代码
+            console.log(event);
+        })
+
+        const items1 = [{value: 1, label: "河南"}, {value: 2, label: "河北"}, {value: 3, label: "山东"}];
+        metis.selectFillOptions("#id_selectProvince", items1, 3);
+
+        const items2 = [{value: "A", label: "上海"}, {value: "B", label: "北京"}, {value: "C", label: "天津"}];
+        metis.selectFillOptions("#id_selectCity", items2, "B", "请选择城市");
+
+    });
+</script>

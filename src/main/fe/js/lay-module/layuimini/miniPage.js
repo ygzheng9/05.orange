@@ -132,6 +132,15 @@ layui.define(["element", "jquery"], function (exports) {
             $(container).html("");
             $.get(href)
                 .done(function (data) {
+                    if (data.state !== undefined && data.state === "fail") {
+                        // console.log("没有权限", data);
+                        // layer.msg("不允许访问");
+
+                        miniPage.hashChange("page404");
+
+                        return;
+                    }
+
                     $(container).html(data);
                     element.init();
                 })

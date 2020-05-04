@@ -29,6 +29,8 @@ target/
 log/
 .idea/
 
+upload/
+
 src/main/resources/default.properties
 
 src/main/webapp/download/*.*
