@@ -132,6 +132,7 @@ layui.define(["element", "jquery"], function (exports) {
             $(container).html("");
             $.get(href)
                 .done(function (data) {
+                    // 20200504 zhengyg 增加权限判定
                     if (data.state !== undefined && data.state === "fail") {
                         // console.log("没有权限", data);
                         // layer.msg("不允许访问");

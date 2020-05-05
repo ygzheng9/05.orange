@@ -12,7 +12,11 @@ layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
 
     // 全局共享数据
     const state = {
+        // 当前选中的 客户 id
         clientid: 0,
+
+        // 当前登录用所具有的权限，在 index.js 中被初始化；
+        loginRoles: [],
     };
 
     const metis = {
@@ -22,6 +26,74 @@ layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
 
         getState: function (k) {
             return state[k];
+        },
+
+        // 20200505 zhengyg 增加权限判定
+        setLoginRoles: function (str) {
+            this.setState("loginRoles", this.toList(str));
+        },
+
+        // 把以空格分割的字符串，拆分成 list
+        toList: function (str) {
+            const list = [];
+
+            if (str === undefined || str.length === 0) {
+                return list;
+            }
+
+            const l = str.split(" ");
+            l.forEach(function (i) {
+                const v = i.trim();
+                if (v.length > 0) {
+                    list.push(v);
+                }
+            });
+
+            return list;
+        },
+
+        // 两个 list 中是否有相同元素
+        hasCommon: function (list1, list2) {
+            if (
+                list1 === undefined ||
+                list2 === undefined ||
+                list1.length === 0 ||
+                list2.length === 0
+            ) {
+                return false;
+            }
+
+            for (var i = 0; i < list1.length; i++) {
+                for (var j = 0; j < list2.length; j++) {
+                    if (list1[i] === list2[j]) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+
+        // 在 miniMenu 的 each 中使用；
+        // auths 是 每个菜单项所要求的 权限
+        checkPermission: function (auths) {
+            // 没有定义权限，默认都可以访问
+            if (auths === undefined || auths.length === 0) {
+                return true;
+            }
+
+            // 从全局中取得数据；
+            const { loginRoles } = state;
+
+            // 定义了所需的权限，但是当前用户没有任何权限，则禁止访问
+            if (loginRoles.length === 0) {
+                return false;
+            }
+
+            // 约定都是 空格 分割
+            const required = this.toList(auths);
+            // console.log("required: ", required);
+            return this.hasCommon(required, loginRoles);
         },
 
         getCheckBoxValues: function (name) {
