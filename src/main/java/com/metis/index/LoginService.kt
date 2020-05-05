@@ -1,15 +1,20 @@
 package com.metis.index
 
+import cn.hutool.json.JSONArray
 import com.jfinal.aop.Inject
+import com.jfinal.kit.Kv
 import com.jfinal.kit.Ret
 import com.jfinal.kit.StrKit
 import com.jfinal.log.Log
 import com.metis.common.ZCacheKit
 import com.metis.common.model.Session
+import com.metis.common.model.ZResource
 import com.metis.common.model.ZUser
 
 open class LoginService {
     private val logger = Log.getLog(LoginService::class.java)
+
+    private val menuDao = ZResource().dao()
 
     @Inject
     lateinit var userSvc: UserService
@@ -91,5 +96,37 @@ open class LoginService {
             return loginAccount
         }
         return null
+    }
+
+    fun loadConfig() : Kv  {
+        // 加载菜单
+        val items = menuDao.template("auth.loadMenu").find()
+
+        // 约定：根节点特性
+        val roots = items.filter { it.parent == "0" }
+
+        // 广度遍历
+        fun buildTree(nodes: List<ZResource>) {
+            for(node in nodes) {
+                node.child = items.filter { it.parent == node.code }
+
+                buildTree(node.child)
+            }
+        }
+
+        buildTree(roots)
+
+        // layuimini 所需的信息
+        val homeInfo = Kv.by("title", "首页")
+            .set("href", "welcomePage1")
+
+        val logoInfo = Kv.by("title", "METIS")
+            .set("image", "assets/images/brain.png")
+            .set("href", "")
+
+        return Kv
+            .by("homeInfo", homeInfo)
+            .set("logoInfo", logoInfo)
+            .set("menuInfo", roots)
     }
 }

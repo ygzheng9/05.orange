@@ -25,7 +25,7 @@ public class _MappingKit {
 		arp.addMapping("t_z_company", "id", ZCompany.class);
 		arp.addMapping("t_z_department", "id", ZDepartment.class);
 		arp.addMapping("t_z_lead_info", "id", ZLeadInfo.class);
-		arp.addMapping("t_z_resources", "id", ZResources.class);
+		arp.addMapping("t_z_resource", "id", ZResource.class);
 		arp.addMapping("t_z_user", "id", ZUser.class);
 	}
 }

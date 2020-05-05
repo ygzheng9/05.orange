@@ -3,6 +3,7 @@ package com.metis.common
 
 import com.jfinal.config.*
 import com.jfinal.ext.handler.ContextPathHandler
+import com.jfinal.json.FastJsonFactory
 import com.jfinal.json.MixedJsonFactory
 import com.jfinal.kit.Prop
 import com.jfinal.kit.PropKit
@@ -34,7 +35,12 @@ class StartConfig : JFinalConfig() {
         // 配置对超类中的属性进行注入
         me.injectSuperClass = true
 
+        // 支持 select 中的 动态名称 填充进 model
         me.setJsonFactory(MixedJsonFactory())
+
+        // 不支持 select 的动态字段
+//        me.setJsonFactory(FastJsonFactory())
+
 
         /// 设置 devMode 之下的 action report 是否在 invocation 之后，默认值为 true
         me.setReportAfterInvocation(false)

@@ -46,21 +46,21 @@
           "href": "userList",
           "icon": "fa fa-file-text",
           "target": "_self",
-          "auth": "admin root"
+          "permissions": "admin root"
         },
         {
           "title": "公司管理",
           "href": "companyList",
           "icon": "fa fa-window-maximize",
           "target": "_self",
-          "auth": "root"
+          "permissions": "admin"
         },
         {
           "title": "部门管理",
           "href": "departmentList",
           "icon": "fa fa-gears",
           "target": "_self",
-          "auth": ""
+          "permissions": ""
         },
         {
           "title": "菜单管理",
@@ -155,7 +155,7 @@
       "icon": "fa fa-lemon-o",
       "href": "",
       "target": "_self",
-      "auth": "admin root",
+      "permissions": "admin root",
       "child": [
         {
           "title": "客户档案",

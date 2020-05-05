@@ -9,7 +9,16 @@ where a.email = #para(0)
 
 ### 需要做权限控制的资源
 #sql("allResources")
-select a.*
-from t_z_resources a
-order by a.id;
+select a.href `key`, max(a.permissions) permissions
+from t_z_resource a
+group by a.href
+order by a.href;
+#end
+
+### 获取菜单项
+#sql("loadMenu")
+select *
+  from t_z_resource
+where `type` = 'menu'
+order by `code`;
 #end

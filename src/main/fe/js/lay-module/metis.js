@@ -76,9 +76,9 @@ layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
 
         // 在 miniMenu 的 each 中使用；
         // auths 是 每个菜单项所要求的 权限
-        checkPermission: function (auths) {
+        checkPermission: function (perms) {
             // 没有定义权限，默认都可以访问
-            if (auths === undefined || auths.length === 0) {
+            if (perms === undefined || perms === null || perms.length === 0) {
                 return true;
             }
 
@@ -91,7 +91,7 @@ layui.define(["jquery", "miniPage", "layer", "table", "form"], function (
             }
 
             // 约定都是 空格 分割
-            const required = this.toList(auths);
+            const required = this.toList(perms);
             // console.log("required: ", required);
             return this.hasCommon(required, loginRoles);
         },

@@ -87,7 +87,7 @@ layui.define(["element", "laytpl", "jquery", "metis"], function (exports) {
             var _list = [];
             for (var i = 0, length = list.length; i < length; i++) {
                 // 20200505 zhengyg 增加菜单权限的判定
-                if (metis.checkPermission(list[i].auth)) {
+                if (metis.checkPermission(list[i].permissions)) {
                     _list[i] = callback(i, list[i]);
                 }
             }

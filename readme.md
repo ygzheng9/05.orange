@@ -89,6 +89,7 @@
 3. dropdown table 选择
 4. form 内部元素选择：formId + inputClass  
 5. activeRecord 底层是 map，效果是动态属性：即使没有声明属性字段，只要 sql 中有字段，就可以直接拿来用  
+6. 必须使用 MixedJson
     
 ##  2020/05/03
 1. js 中动态填充 select 的选项；
@@ -115,10 +116,13 @@
     1. 逻辑和后端一致：资源有需要的权限，当前用户有权限列表，判断两个列表是否有交集
     2. js 获取当前用户信息，在 loginInterceptor 中设置，在 index.js 中可读取，并保存在全局变量中；
     3. 主体逻辑在 metis.js 中，菜单渲染在 miniMenu.js 中，只修改了 each 函数；
-      
+2. 把菜单和 resource 合并成一张表
+    1. 通过表来配置菜单项；
+    2. 递归生成菜单项；
+    3. java 中使用 object 来表达 js 中所需的 json
+    4. 递归object 转 string 需要用 FastJson，而不是 MixedJson      
     
 ## todo 
-1. upload
-2. action 中获取当前的 actionKey     
+    
 
 

@@ -187,6 +187,7 @@
 
 功能演示
 <hr class="layui-bg-red">
+<button id="id_menu" class="layui-btn">菜单</button>
 
 <!-- 演示：dropdown -->
 <button class="layui-btn layui-btn-sm"
@@ -229,9 +230,8 @@
 </form>
 
 <script>
-    layui.use(['dropdown', 'metis'], function () {
-        var dropdown = layui.dropdown;
-        var metis = layui.metis;
+    layui.use(['dropdown','jquery' , 'metis'], function () {
+        const {dropdown, metis, $} = layui;
 
         // 监听菜单点击
         dropdown.onFilter('test1', function (event) {
@@ -249,6 +249,13 @@
 
         const items2 = [{value: "A", label: "上海"}, {value: "B", label: "北京"}, {value: "C", label: "天津"}];
         metis.selectFillOptions("#id_selectCity", items2, "B", "请选择城市");
+
+        $("#id_menu").on('click', function(e) {
+            $.get("/loadConfig", function(res) {
+                console.log(res);
+            });
+        });
+
 
     });
 </script>

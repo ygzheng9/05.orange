@@ -1,9 +1,12 @@
 package com.metis.index
 
 import cn.hutool.core.util.StrUtil
+import com.alibaba.fastjson.JSONArray
+
 import com.jfinal.aop.Clear
 import com.jfinal.aop.Inject
 import com.jfinal.core.Controller
+import com.jfinal.json.FastJson
 import com.jfinal.kit.JsonKit
 import com.jfinal.kit.Kv
 import com.jfinal.kit.Ret
@@ -96,6 +99,12 @@ class IndexController : Controller() {
         forwardAction("/login")
     }
 
+    fun loadConfig() {
+        val kv = loginSvc.loadConfig()
+
+        // 递归对象 生成 json，需要使用 FastJson，不能是 JFinalJson
+        renderJson(FastJson.getJson().toJson(kv))
+    }
 
     // 业务逻辑
     // user 管理

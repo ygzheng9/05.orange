@@ -10,7 +10,10 @@ layui.use(["jquery", "layer", "miniAdmin", "metis"], function () {
     metis.setLoginRoles(loginRoles);
 
     const options = {
-        iniUrl: "assets/api/init.json", // 初始化接口
+        // iniUrl: "assets/api/init.json", // 初始化接口
+
+        iniUrl: "loadConfig",
+
         clearUrl: "assets/api/clear.json", // 缓存清理接口
         renderPageVersion: true, // 初始化页面是否加版本号
         bgColorDefault: 0, // 主题默认配置

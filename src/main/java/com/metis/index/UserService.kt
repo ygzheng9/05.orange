@@ -59,16 +59,15 @@ open class UserService {
     }
 
     private fun loadAllResources() {
-        val resources =
-            Db.template("auth.allResources").find()
-        allResources = java.util.HashMap()
+        val resources = Db.template("auth.allResources").find()
 
         // 固定格式：z_resources.permissions 空格 分割
-        val splter = Splitter.on(" ")
-        for (r in resources) {
-            val key = r.get<String>("key")
-            val s = r.get<String>("permissions")
-            val fields = splter.splitToList(s)
+        val splitter = Splitter.on(" ")
+        allResources = java.util.HashMap()
+        resources.forEach { r ->
+            val key = r.get<String>("key", "")
+            val s = r.get<String>("permissions", "")
+            val fields = splitter.splitToList(s)
             allResources!![key] = fields
         }
     }
