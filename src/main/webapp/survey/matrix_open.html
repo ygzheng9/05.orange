@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>METIS</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/assets/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all" />
+
+    <style>
+        td .layui-input {
+            height: 24px;
+        }
+
+        .submit_btn {
+            text-align: right;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .level_2 {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-container">
+        <div class="title">#(title)</div>
+
+        <form class="layui-form" lay-filter="searchForm" >
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">业务日期</label>
+                    <div class="layui-input-inline" style="width: 200px;">
+                        <input type="text" class="layui-input" name="bizDate" id="bizDate">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">业务单位</label>
+                    <div class="layui-input-inline" style="width: 200px;">
+                        <select name="bizUnit" lay-verify="required">
+                            <option value="">请选择公司</option>
+                            #for(opt : options)
+                                <option value="#(opt.value)"
+                                        #(u == opt.value ? "selected" : "") >#(opt.display)</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <div class="layui-input-block submit_btn">
+                        <button class="layui-btn" lay-submit lay-filter="btnSearch" id="btnSearch">查找</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form id="formId" class="layui-form">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="80">
+                    <col width="300">
+                    <col width="100">
+                    <col width="80">
+                    <col width="300">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>指标名称</th>
+                    <th>指标值</th>
+                    <th>单位</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                #for(line : lines)
+                <tr>
+                    #if(line.type == "LEVEL_2")
+                    <td colspan="5"><span class="level_2">#(line.code)</span></td>
+                    #else
+                    <td>#(line.code)</td>
+                    <td>#(line.name)</td>
+                    <td><input type="text" name="#(line.code)" required  lay-verify="required|number" class="layui-input" value="#(line.value)">
+                    </td>
+                    <td>#(line.unit)</td>
+                    <td><input type="text" name="#(line.code)_comment" class="layui-input" value="#(line.comment)"></td>
+                    #end
+                </tr>
+                #end
+                </tbody>
+            </table>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block submit_btn">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="id_num" hidden>#(num)</div>
+    <div id="id_user" hidden>#(id)</div>
+    <div id="id_bizDate" hidden>#(d)</div>
+
+<script src="/assets/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/assets/js/lay-config.js" charset="utf-8"></script>
+
+<script src="/assets/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/assets/lib/ramda.min.js" charset="utf-8"></script>
+
+#@loadJS("/assets/js/app/survey_matrix_open.js")
+
+</body>
+
+</html>

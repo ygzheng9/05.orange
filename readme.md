@@ -122,6 +122,16 @@
     3. java 中使用 object 来表达 js 中所需的 json
     4. 递归object 转 string 需要用 FastJson，而不是 MixedJson      
     
+    
+##  2020/05/10
+1. 问卷调查 survey：问卷代码，提交人，属性（选项值）
+2. 指标填报：表单，指标代码，业务时间，公司，属性（指标值，说明备注，提交人，提交日期）
+3. 单选框判断是否选中值 survey_open
+4. 从指定文件读取：yaml，excel
+5. 匹配：问卷读取的信息 + db 保存的值，fillAnswer
+6. selectOption 的可选值：指标填报的公司列表
+7. 按照kv 中 key 的后缀，拆分并匹配 指标值 和 说明备注   
+    
 ## todo 
     
 

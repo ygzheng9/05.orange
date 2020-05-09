@@ -21,6 +21,7 @@ import com.metis.index.IndexController
 import com.metis.index.LoginInterceptor
 import com.metis.sales.ClientController
 import com.metis.sales.LeadController
+import com.metis.survey.SurveryController
 
 class StartConfig : JFinalConfig() {
     override fun configConstant(me: Constants) {
@@ -55,6 +56,8 @@ class StartConfig : JFinalConfig() {
 
         me.add("/page/sales/client", ClientController::class.java, "/sales/client")
         me.add("/page/sales/lead", LeadController::class.java, "/sales/lead")
+
+        me.add("survey", SurveryController::class.java, "/survey")
 
     }
 

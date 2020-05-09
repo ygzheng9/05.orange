@@ -102,6 +102,8 @@ open class LoginService {
         // 加载菜单
         val items = menuDao.template("auth.loadMenu").find()
 
+        // TODO: 菜单项增加用户权限的过滤
+
         // 约定：根节点特性
         val roots = items.filter { it.parent == "0" }
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>METIS</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/assets/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all" />
+
+    <style>
+        #formId .layui-form-label {
+            width: 500px;
+        }
+
+        #formId .layui-input-block  {
+            margin-left: 540px;
+        }
+
+        #formId .title {
+            text-align: center;
+            margin-top: 45px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-container">
+
+        <form id="formId" class="layui-form" action="/survey/submit?num=#(num)&id=#(id)">
+            #for(section : sections)
+                <h2 class="title">#(section.section)</h2>
+                #for(question : section.questions)
+                    <div class="layui-form-item" lay-verify-msg="请填写#(question.seq)" lay-verify="mustradio">
+                        <label class="layui-form-label">#(question.seq) : #(question.question)</label>
+                        <div class="layui-input-block" required>
+                            #for(option : question.optionsList)
+                            <input type="#(question.type)" name="#(question.seq)" value="#(for.count)" title="#(option)"
+                                   #(question.answer.toInt() == for.count ? "checked" : "")
+                            >
+                            #end
+                        </div>
+                    </div>
+                #end
+            #end
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="id_num" hidden>#(num)</div>
+    <div id="id_user" hidden>#(id)</div>
+
+
+<script src="/assets/lib/layui/layui.js" charset="utf-8"></script>
+<script src="/assets/js/lay-config.js" charset="utf-8"></script>
+
+<script src="/assets/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="/assets/lib/ramda.min.js" charset="utf-8"></script>
+
+    #@loadJS("/assets/js/app/survey_open.js")
+</body>
+
+</html>

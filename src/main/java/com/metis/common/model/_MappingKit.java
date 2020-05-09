@@ -27,6 +27,9 @@ public class _MappingKit {
 		arp.addMapping("t_z_lead_info", "id", ZLeadInfo.class);
 		arp.addMapping("t_z_resource", "id", ZResource.class);
 		arp.addMapping("t_z_user", "id", ZUser.class);
+		arp.addMapping("z_t_survey", "id", ZTSurvey.class);
+		arp.addMapping("z_t_survey_item", "id", ZTSurveyItem.class);
+		arp.addMapping("z_t_survey_matrix", "id", ZTSurveyMatrix.class);
 	}
 }
 
