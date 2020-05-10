@@ -159,6 +159,7 @@ layui.use(
             } else if (obj.event === "details") {
                 // 设置全局变量
                 metis.setState("clientId", data.id);
+                console.log(data);
 
                 // 仅改变 url，但是菜单没有高亮切换
                 // miniPage.hashChange(`${prefix}/basicInfo?clientId=${data.id}`);

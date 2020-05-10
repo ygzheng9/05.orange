@@ -1,5 +1,6 @@
 package com.metis.index
 
+import cn.hutool.core.util.StrUtil
 import cn.hutool.json.JSONArray
 import com.jfinal.aop.Inject
 import com.jfinal.kit.Kv
@@ -17,7 +18,8 @@ open class LoginService {
     private val menuDao = ZResource().dao()
 
     @Inject
-    lateinit var userSvc: UserService
+    lateinit var
+            userSvc: UserService
 
     companion object {
         // 存放登录用户的 cacheName
@@ -112,13 +114,17 @@ open class LoginService {
             for(node in nodes) {
                 node.child = items.filter { it.parent == node.code }
 
+                if (node.child == null) {
+                    return
+                }
+
                 buildTree(node.child)
             }
         }
 
         buildTree(roots)
 
-        // layuimini 所需的信息
+        // laymini 所需的信息
         val homeInfo = Kv.by("title", "首页")
             .set("href", "welcomePage1")
 

@@ -8,7 +8,7 @@ password = !@#456QWErty
 devMode = true
 
 # 服务器目录
-dataDir = /Users/ygzheng/Documents/playground/javaweb/05.orange/src/main/resources
+dataDir = /Users/ygzheng/Documents/playground/javaweb/05.orange/src/main/resources/local
 
 # 微信服务器回调所用的 token
 token=bala2020

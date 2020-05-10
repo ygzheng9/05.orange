@@ -25,8 +25,10 @@ public class _MappingKit {
 		arp.addMapping("t_z_company", "id", ZCompany.class);
 		arp.addMapping("t_z_department", "id", ZDepartment.class);
 		arp.addMapping("t_z_lead_info", "id", ZLeadInfo.class);
-		arp.addMapping("t_z_resource", "id", ZResource.class);
+		arp.addMapping("t_z_resource", "incId", ZResource.class);
 		arp.addMapping("t_z_user", "id", ZUser.class);
+		arp.addMapping("z_m_client_partition", "id", ZMClientPartition.class);
+		arp.addMapping("z_m_client_partition_score", "id", ZMClientPartitionScore.class);
 		arp.addMapping("z_t_survey", "id", ZTSurvey.class);
 		arp.addMapping("z_t_survey_item", "id", ZTSurveyItem.class);
 		arp.addMapping("z_t_survey_matrix", "id", ZTSurveyMatrix.class);

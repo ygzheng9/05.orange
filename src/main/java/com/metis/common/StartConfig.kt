@@ -17,6 +17,7 @@ import com.jfinal.wxaapp.WxaConfig
 import com.jfinal.wxaapp.WxaConfigKit
 import com.metis.common.model._MappingKit
 import com.metis.index.AuthInterceptor
+import com.metis.index.ClientPartitionController
 import com.metis.index.IndexController
 import com.metis.index.LoginInterceptor
 import com.metis.sales.ClientController
@@ -57,8 +58,11 @@ class StartConfig : JFinalConfig() {
         me.add("/page/sales/client", ClientController::class.java, "/sales/client")
         me.add("/page/sales/lead", LeadController::class.java, "/sales/lead")
 
+        // ABCD 调查问卷，指标填报
         me.add("survey", SurveryController::class.java, "/survey")
 
+        // 客户分组
+        me.add("partition", ClientPartitionController::class.java, "/survey")
     }
 
     override fun configEngine(me: Engine) {

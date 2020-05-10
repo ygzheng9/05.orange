@@ -32,6 +32,9 @@ log/
 upload/
 
 src/main/resources/default.properties
+src/main/resources/demo-config-dev.txt
+
+src/main/resources/local
 
 src/main/webapp/download/*.*
 src/main/webapp/zdata/*.*

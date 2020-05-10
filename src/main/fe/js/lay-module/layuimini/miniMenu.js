@@ -196,11 +196,15 @@ layui.define(["element", "laytpl", "jquery", "metis"], function (exports) {
             $("body").on("click", "[data-menu]", function () {
                 var loading = layer.load(0, { shade: false, time: 2 * 1000 });
                 var menuId = $(this).attr("data-menu");
+
+                // console.log(menuId);
+
                 // header
                 $(
                     ".layuimini-header-menu .layui-nav-item.layui-this"
                 ).removeClass("layui-this");
                 $(this).addClass("layui-this");
+
                 // left
                 $(
                     ".layuimini-menu-left .layui-nav.layui-nav-tree.layui-this"
